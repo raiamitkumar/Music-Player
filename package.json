@@ -26,6 +26,7 @@
   },
   "scripts": {
     "debug": "node debug app.js",
+    "postinstall": "grunt uglify",
     "start": "node app.js"
   },
   "main": "app.js",
