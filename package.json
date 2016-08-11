@@ -28,7 +28,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "postinstall": "grunt uglify",
-    "start": "node app.js"
+    "start": "sails lift"
   },
   "main": "app.js",
   "repository": {
