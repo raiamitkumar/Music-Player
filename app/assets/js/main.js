@@ -1,7 +1,7 @@
 var electron = require('electron');
 var ipcRender = electron.ipcRenderer;
-var dialog = electron.remote;
-console.log(dialog);
+var remote = electron.remote;
+var dialog = remote.require('electron').dialog;
 var min_button = document.getElementById('minimize');
 var max_button = document.getElementById('maximize');
 var close_button = document.getElementById('close');
@@ -9,9 +9,11 @@ var file_option = document.getElementById('file-menu-option');
 var file_menu = document.getElementById('file-menu');
 var open_button = document.getElementById('open');
 var open_file_btn = document.getElementById('open-file-btn');
-var open_file_input = document.getElementById('open-file-input');
+var exit_button = document.getElementById('exit-btn');
 var isMaximized = false;
 var menuActive = false, count = 0;
+var path = "";
+
 document.addEventListener('click', function(e){
   if(e.target == file_option){
     if(menuActive){
@@ -51,9 +53,20 @@ close_button.addEventListener('click', function(){
     hideMenu()
   }
 })
+exit_button.addEventListener('click', function(){
+  ipcRender.send('close')
+  if(menuActive){
+    hideMenu()
+  }
+})
 open_file_btn.addEventListener('click', function(){
   hideMenu()
-  open_file_input.click();
+  path = dialog.showOpenDialog({
+      properties: ['openFile']
+  });
+  if(path != ""){
+    alert(path);
+  }
 })
 
 function hideMenu(){
