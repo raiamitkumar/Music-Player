@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Player</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+  </head>
+  <body>
+    <section class="titlebar">
+      <p class="menu-item" id="file-menu-option">
+        File
+      </p>
+      <div class="window-controls">
+        <img src="../assets/images/controls/window/min.png" class="window-control-button" id="minimize">
+        <img src="../assets/images/controls/window/max.png" class="window-control-button" id="maximize">
+        <img src="../assets/images/controls/window/close.png" class="window-control-button" id="close">
+      </div>
+    </section>
+    <div class="wrapper">
+      <section class="player">
+        <a href="" title="" class="controls">
+          <img src="../assets/images/controls/player/play.png" style="margin-top:15px;">
+        </a>
+        <input type="range" id="seek" value="0" max=""/>
+        <a href="" title="" class="controls">
+          <img src="../assets/images/controls/player/previous.png">
+        </a>
+        <a href="" title="" class="controls">
+          <img src="../assets/images/controls/player/next.png">
+        </a>
+      </section>
+    </div>
+
+    <section id="file-menu">
+      <p id="open-file-btn">Open</p>
+      <p>Close</p>
+    </section>
+
+    <input type="file" style="display:none;" id="open-file-input">
+
+    <script type="text/javascript" src="../assets/js/main.js"></script>
+  </body>
+</html>
