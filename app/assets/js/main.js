@@ -9,10 +9,14 @@ var file_option = document.getElementById('file-menu-option');
 var file_menu = document.getElementById('file-menu');
 var open_button = document.getElementById('open');
 var open_file_btn = document.getElementById('open-file-btn');
+var close_file_btn = document.getElementById('close-file-btn');
 var exit_button = document.getElementById('exit-btn');
+var play_button = document.getElementById('play-button');
+var seek = document.getElementById('seek');
 var isMaximized = false;
 var menuActive = false, count = 0;
 var path = "";
+var songDuration, audio, timeLeft = 0, timePlayed = 0;
 
 document.addEventListener('click', function(e){
   if(e.target == file_option){
@@ -61,11 +65,37 @@ exit_button.addEventListener('click', function(){
 })
 open_file_btn.addEventListener('click', function(){
   hideMenu()
+  // path = dialog.showOpenDialog({
+  //     properties: ['openFile', 'multiSelections']
+  // });
   path = dialog.showOpenDialog({
       properties: ['openFile']
   });
-  if(path != ""){
-    alert(path);
+  if(path.length > 0){
+    if(path.length > 1){
+      playFile(path);
+    }
+    else{
+      playMultiFiles(path);
+    }
+  }
+})
+close_file_btn.addEventListener('click', function(){
+  audio.pause();
+  audio.currentTime = 0;
+  audio.src = "";
+  play_button.src = "../assets/images/controls/player/play.png";
+})
+play_button.addEventListener('click', function(){
+  if(audio){
+    if(audio.paused){
+      audio.play()
+      play_button.src = "../assets/images/controls/player/pause.png";
+    }
+    else{
+      audio.pause()
+      play_button.src = "../assets/images/controls/player/play.png";
+    }
   }
 })
 
@@ -74,11 +104,34 @@ function hideMenu(){
   menuActive = false;
 }
 
-document.body.style.backgroundImage = "url('file:///E:/sultan.jpg')";
-var audio = new Audio('file:///E:/Music/Challa.mp3');
-var songDuration = 0;
-audio.addEventListener('loadedmetadata', function() {
-    songDuration = audio.duration;
-    audio.play();
-});
-audio.muted = true;
+document.body.style.backgroundImage = "url('file:///E:/Kingfisher-Calendar-2012-Angela-Jonsson-December-WideScreen-Wallpaper-12.jpg')";
+
+function playFile(path){
+  if(audio){
+    audio.pause();
+    audio.currentTime = 0;
+  }
+  audio = new Audio('file:///'+path);
+  songDuration = 0;
+  audio.addEventListener('loadedmetadata', function() {
+      songDuration = audio.duration;
+      play_button.src = "../assets/images/controls/player/pause.png";
+      audio.play();
+      startSeek();
+  });
+  audio.muted = false;
+}
+
+function startSeek(){
+  seek.max = songDuration;
+  timeLeft = songDuration;
+  setInterval(function(){
+    if(timeLeft >= 0){
+      timePlayed = songDuration - timeLeft;
+      seek.value = timePlayed;
+      var a = timePlayed/songDuration;
+      seek.style.background = "linear-gradient(to right, red 0%, red " + a + "%, #fff 100%)";
+      timeLeft--;
+    }
+  }, 1000)
+}

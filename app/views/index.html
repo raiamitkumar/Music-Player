@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <title>Player</title>
     <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
   </head>
   <body>
     <section class="titlebar">
@@ -17,16 +18,26 @@
     </section>
     <div class="wrapper">
       <section class="player">
-        <a href="" title="" class="controls">
-          <img src="../assets/images/controls/player/play.png" style="margin-top:15px;">
-        </a>
-        <input type="range" id="seek" value="0" max=""/>
-        <a href="" title="" class="controls">
-          <img src="../assets/images/controls/player/previous.png">
-        </a>
-        <a href="" title="" class="controls">
-          <img src="../assets/images/controls/player/next.png">
-        </a>
+        <div class="container-fluid">
+          <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
+            <a href="#" title="" class="controls">
+              <img src="../assets/images/controls/player/play.png" id="play-button" style="height:25px;" />
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+            <input type="range" id="seek" value="0" max=""/>
+          </div>
+          <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
+            <a href="" title="" class="controls">
+              <img src="../assets/images/controls/player/previous.png" style="height:25px;">
+            </a>
+          </div>
+          <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
+            <a href="" title="" class="controls">
+              <img src="../assets/images/controls/player/next.png" style="height:25px;">
+            </a>
+          </div>
+        </div>
       </section>
     </div>
 
@@ -35,8 +46,10 @@
       <p id="close-file-btn">Close</p>
       <p id="exit-btn">Exit</p>
     </section>
-
-    <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+      window.$ = window.jQuery = require('../assets/js/jquery-2.1.4.min.js');
+    </script>
+    <script type="text/javascript" src="../assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="../assets/js/main.js"></script>
   </body>
 </html>
