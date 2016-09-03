@@ -4,6 +4,8 @@
     <title>Player</title>
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:200,300" rel="stylesheet">
   </head>
   <body>
     <section class="titlebar">
@@ -16,11 +18,19 @@
         <img src="../assets/images/controls/window/close.png" class="window-control-button" id="close">
       </div>
     </section>
-    <div class="wrapper">
 
-      <img id="album-cover" src="file:///E:/22kingfisher-sobhita-dhulipala.jpg">
-
-      <section class="player">
+    <div class="album-banner-container">
+      <img class="album-banner" src="file:///E:/Tamasha-Bollywood-movie-Official-Trailer-Released.jpg" />
+      <div class="tint">
+      </div>
+      <div class="container-fluid current-song-info">
+        <div class="col-md-8 col-lg-8 col-sm-8 col-xs-5">
+          <p style="font-size:14px;margin-left:130px;color:#fff;letter-spacing:1px;">Now Playing</p>
+          <p class="song-title">Heer To Badi Sad - MS Dhoni</p>
+          <p class="artist-name">Armaan Malik</p>
+        </div>
+      </div>
+      <div class="container-fluid player">
         <div class="container-fluid">
           <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">
             <a href="#" title="" class="controls">
@@ -41,8 +51,56 @@
             </a>
           </div>
         </div>
-      </section>
+      </div>
     </div>
+
+    <!-- <p class="playlist-end-message">Hey, looks like you've reached the end of the playlist. Let's add some more songs!</p> -->
+    <div class="container-fluid" style="padding:0px;">
+      <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0px;">
+        <table style="width:100%;margin-top:30px;" class="table-striped">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Album</td>
+              <td>Artist</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Heer To Badi Sad</td>
+              <td>Tamasha</td>
+              <td>Amaal Malik</td>
+            </tr>
+            <tr>
+              <td>Tum Jo Aaye</td>
+              <td>Once Upon a Time in Mumbai</td>
+              <td>Rahat Fateh Ali Khan</td>
+            </tr>
+            <tr>
+              <td>Tum Se Hi</td>
+              <td>Jab We Met</td>
+              <td>Amaal Malik</td>
+            </tr>
+            <tr>
+              <td>Mera Mann</td>
+              <td>Nautanki Saala</td>
+              <td>Ayushmann Khuranna</td>
+            </tr>
+            <tr>
+              <td>Zinda</td>
+              <td>Bhaag Milkha Bhaag</td>
+              <td>Shankar Mahadevan</td>
+            </tr>
+            <tr>
+              <td>Yeh Fitoor Mera</td>
+              <td>Fitoor</td>
+              <td>Arjit Singh</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
 
     <section id="file-menu">
       <p id="open-file-btn">Open</p>

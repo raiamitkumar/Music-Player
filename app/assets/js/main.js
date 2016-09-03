@@ -109,7 +109,7 @@ function hideMenu(){
   menuActive = false;
 }
 
-document.body.style.backgroundImage = "url('file:///E:/Kingfisher-Calendar-2012-Angela-Jonsson-December-WideScreen-Wallpaper-12.jpg')";
+// document.body.style.backgroundImage = "url('file:///E:/befikre-movie-poster-1-1.jpg')";
 
 function playFile(path){
   if(audio){
