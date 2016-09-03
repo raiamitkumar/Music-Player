@@ -2,6 +2,10 @@ var electron = require('electron');
 var ipcRender = electron.ipcRenderer;
 var remote = electron.remote;
 var dialog = remote.require('electron').dialog;
+var fs = require('fs');
+var id3 = require('id3js');
+var musicmetadata = require('musicmetadata');
+var audioMetaData = require('audio-metadata');
 var min_button = document.getElementById('minimize');
 var max_button = document.getElementById('maximize');
 var close_button = document.getElementById('close');
@@ -13,6 +17,7 @@ var close_file_btn = document.getElementById('close-file-btn');
 var exit_button = document.getElementById('exit-btn');
 var play_button = document.getElementById('play-button');
 var seek = document.getElementById('seek');
+var albumCover = document.getElementById('album-cover');
 var isMaximized = false;
 var menuActive = false, count = 0;
 var path = "";
@@ -72,7 +77,7 @@ open_file_btn.addEventListener('click', function(){
       properties: ['openFile']
   });
   if(path.length > 0){
-    if(path.length > 1){
+    if(path.length === 1){
       playFile(path);
     }
     else{
@@ -112,6 +117,23 @@ function playFile(path){
     audio.currentTime = 0;
   }
   audio = new Audio('file:///'+path);
+
+  // Getting metadata for the audio file
+  id3({ file: path.toString(), type: id3.OPEN_LOCAL }, function(err, tags) {
+    if(tags){
+      console.log(tags.v2.image.data);
+    }
+  });
+
+  // Getting Album Cover of the audio file
+  musicmetadata(fs.createReadStream(path.toString()), function (err, metadata) {
+    if(!err){
+      var base64Data = base64ArrayBuffer( metadata.picture[0].data );
+      albumCover.src = 'data:image/png;base64, ' + base64Data;
+      var img = "url('data:image/png;base64, "+base64Data + "')";
+      document.body.style.backgroundImage = img;
+    }
+  });
   songDuration = 0;
   audio.addEventListener('loadedmetadata', function() {
       songDuration = audio.duration;
