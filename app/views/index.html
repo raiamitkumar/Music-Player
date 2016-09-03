@@ -4,8 +4,8 @@
     <title>Player</title>
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:200,300" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:200,300" rel="stylesheet"> -->
   </head>
   <body>
     <section class="titlebar">
@@ -20,14 +20,14 @@
     </section>
 
     <div class="album-banner-container">
-      <img class="album-banner" src="file:///E:/Tamasha-Bollywood-movie-Official-Trailer-Released.jpg" />
+      <img class="album-banner" id="album-banner" src="file:///E:/Tamasha-Bollywood-movie-Official-Trailer-Released.jpg" />
       <div class="tint">
       </div>
       <div class="container-fluid current-song-info">
         <div class="col-md-8 col-lg-8 col-sm-8 col-xs-5">
           <p style="font-size:14px;margin-left:130px;color:#fff;letter-spacing:1px;">Now Playing</p>
-          <p class="song-title">Heer To Badi Sad - MS Dhoni</p>
-          <p class="artist-name">Armaan Malik</p>
+          <p class="song-title"><span id="song-title">Heer To Badi Sad</span> - <span id="song-album">MS Dhoni</span></p>
+          <p class="artist-name" id="song-artist">Armaan Malik</p>
         </div>
       </div>
       <div class="container-fluid player">

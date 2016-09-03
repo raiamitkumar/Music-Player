@@ -12,14 +12,14 @@ body{
   width: 100vw;
   height: 30px;
   -webkit-app-region: drag;
-  background-color: #795548;
+  background-color: #d3351f;
   z-index: 10;
 }
 .menu-item{
   -webkit-app-region: no-drag;
   float: left;
   margin: 9px;
-  color: #bbb;
+  color: #eee;
   letter-spacing: 1px;
   font-family: sans-serif;
   font-size: 12px;
@@ -49,10 +49,11 @@ body{
 }
 #file-menu p:hover{
   color:#fff;
-  background: #f4481e;
+  background: #d3351f;
 }
 .window-controls{
   padding: 8px;
+  padding-top: 4px;
   float: right;
   height: 30px;
   -webkit-app-region: no-drag;
@@ -87,8 +88,9 @@ body{
   bottom: 0px;
   width: 100vw;
   height: 70px;
-  background: #795548;
+  background: #d3351f;
   padding-top: 25px;
+  z-index: 100;
 }
 .controls{
   padding-left: 15px;

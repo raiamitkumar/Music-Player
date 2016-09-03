@@ -17,7 +17,10 @@ var close_file_btn = document.getElementById('close-file-btn');
 var exit_button = document.getElementById('exit-btn');
 var play_button = document.getElementById('play-button');
 var seek = document.getElementById('seek');
-var albumCover = document.getElementById('album-cover');
+var albumCover = document.getElementById('album-banner');
+var songTitle = document.getElementById('song-title');
+var songAlbum = document.getElementById('song-album');
+var songArtist = document.getElementById('song-artist');
 var isMaximized = false;
 var menuActive = false, count = 0;
 var path = "";
@@ -109,8 +112,6 @@ function hideMenu(){
   menuActive = false;
 }
 
-// document.body.style.backgroundImage = "url('file:///E:/befikre-movie-poster-1-1.jpg')";
-
 function playFile(path){
   if(audio){
     audio.pause();
@@ -121,17 +122,18 @@ function playFile(path){
   // Getting metadata for the audio file
   id3({ file: path.toString(), type: id3.OPEN_LOCAL }, function(err, tags) {
     if(tags){
-      console.log(tags.v2.image.data);
+      console.log(tags);
+      songTitle.innerHTML = tags.title;
+      songAlbum.innerHTML = tags.album;
+      songArtist.innerHTML = tags.artist;
     }
   });
 
   // Getting Album Cover of the audio file
   musicmetadata(fs.createReadStream(path.toString()), function (err, metadata) {
-    if(!err){
+    if(!err && metadata.picture[0].data){
       var base64Data = base64ArrayBuffer( metadata.picture[0].data );
       albumCover.src = 'data:image/png;base64, ' + base64Data;
-      var img = "url('data:image/png;base64, "+base64Data + "')";
-      document.body.style.backgroundImage = img;
     }
   });
   songDuration = 0;
@@ -152,7 +154,7 @@ function startSeek(){
       timePlayed = songDuration - timeLeft;
       seek.value = timePlayed;
       var a = timePlayed/songDuration;
-      seek.style.background = "linear-gradient(to right, red 0%, red " + a + "%, #fff 100%)";
+      // seek.style.background = "linear-gradient(to right, red 0%, red " + a + "%, #fff 100%)";
       timeLeft--;
     }
   }, 1000)
