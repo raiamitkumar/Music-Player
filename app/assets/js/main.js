@@ -154,7 +154,6 @@ function startSeek(){
       timePlayed = songDuration - timeLeft;
       seek.value = timePlayed;
       var a = timePlayed/songDuration;
-      // seek.style.background = "linear-gradient(to right, red 0%, red " + a + "%, #fff 100%)";
       timeLeft--;
     }
   }, 1000)

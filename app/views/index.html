@@ -4,8 +4,8 @@
     <title>Player</title>
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:200,300" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:200,300" rel="stylesheet">
   </head>
   <body>
     <section class="titlebar">
@@ -55,9 +55,13 @@
     </div>
 
     <!-- <p class="playlist-end-message">Hey, looks like you've reached the end of the playlist. Let's add some more songs!</p> -->
-    <div class="container-fluid" style="padding:0px;">
-      <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="padding:0px;">
-        <table style="width:100%;margin-top:30px;" class="table-striped">
+    <div class="container-fluid no-padding">
+      <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 side-menu no-padding">
+        <p class="side-menu-item">All Songs</p><hr class="side-menu-seperator">
+        <p class="side-menu-item">Current Playlist</p>
+      </div>
+      <div class="col-md-10 col-lg-10 col-sm-10 col-xs-12 current-playlist no-padding">
+        <table style="width:100%;margin-top:30px;" class="table-hover">
           <thead>
             <tr>
               <td>Name</td>

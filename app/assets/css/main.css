@@ -1,3 +1,6 @@
+.no-padding{
+  padding: 0px !important;
+}
 body{
   background-repeat: no-repeat;
   background-size: cover;
@@ -5,21 +8,24 @@ body{
   overflow: hidden;
   font-family: 'Roboto', sans-serif !important;
 }
+body:hover{
+  cursor: default;
+}
 .titlebar{
   position: fixed;
   top: 0px;
   left: 0px;
   width: 100vw;
-  height: 30px;
+  height: 35px;
   -webkit-app-region: drag;
-  background-color: #d3351f;
+  background-color: #f5f5f5;
   z-index: 10;
 }
 .menu-item{
   -webkit-app-region: no-drag;
   float: left;
   margin: 9px;
-  color: #eee;
+  color: #555;
   letter-spacing: 1px;
   font-family: sans-serif;
   font-size: 12px;
@@ -27,16 +33,16 @@ body{
 }
 #file-menu{
   position: fixed;
-  top: 30px;
+  top: 35px;
   left: 0px;
   background-color: #fff;
-  width: 180px;
+  width: 145px;
   box-shadow: 0px 0px 20px #000;
   overflow: hidden;
   display: none;
 }
 #file-menu p{
-  line-height: 30px;
+  line-height: 25px;
   margin-top: 0px;
   margin-bottom: 0px;
   padding-left: 10px;
@@ -49,11 +55,10 @@ body{
 }
 #file-menu p:hover{
   color:#fff;
-  background: #d3351f;
+  background: #b32f1d;
 }
 .window-controls{
   padding: 8px;
-  padding-top: 4px;
   float: right;
   height: 30px;
   -webkit-app-region: no-drag;
@@ -75,7 +80,7 @@ body{
   left: 0px;
   width: 100vw;
   height: 220px;
-  background: rgba(244,67,54,0.38);
+  background: rgba(179,47,29,0.65);
 }
 .album-banner{
   width: 100vw;
@@ -88,7 +93,7 @@ body{
   bottom: 0px;
   width: 100vw;
   height: 70px;
-  background: #d3351f;
+  background: #b32f1d;
   padding-top: 25px;
   z-index: 100;
 }
@@ -158,5 +163,43 @@ input[type=range]::-webkit-slider-thumb {
   letter-spacing: 1px;
 }
 tr{
-  height: 40px;
+  height: 45px;
+  font-size: 14px;
+  text-align: center;
+}
+tbody tr:hover{
+  cursor: pointer;
+}
+.side-menu{
+  height: 300px;
+  background: #f9f9f9;
+  z-index: 0;
+  margin-top: 15px;
+  padding-top: 30px !important;
+}
+.side-menu-item{
+  width: 100%;
+  color: #555;
+  line-height: 45px;
+  padding: 0px;
+  margin-bottom: 0px;
+  padding-left: 20px;
+}
+.side-menu-item:hover{
+  background-color: #e4e4e4;
+  cursor: pointer;
+}
+.side-menu-seperator{
+  width: 90%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-top: 1px solid #b7b7b7;
+}
+@media (min-width: 768px){
+  .side-menu {
+      width: 19.66666667% !important;
+  }
+  .current-playlist {
+      width: 80.333333% !important;
+  }
 }
