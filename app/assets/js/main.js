@@ -134,6 +134,8 @@ function playFile(path){
     if(!err && metadata.picture[0].data){
       var base64Data = base64ArrayBuffer( metadata.picture[0].data );
       albumCover.src = 'data:image/png;base64, ' + base64Data;
+      var img = "url('data:image/png;base64, "+base64Data + "')";
+      document.getElementById('player-background').style.backgroundImage = img; 
     }
   });
   songDuration = 0;
