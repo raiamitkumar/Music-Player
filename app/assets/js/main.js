@@ -27,11 +27,13 @@ var menuActive = false, count = 0;
 var path = "";
 var songDuration, audio, timeLeft = 0, timePlayed = 0;
 
+// Function to check for the height of the window and recompute the height of the current playlist section
 function resizeContainer(){
   var height = window.outerHeight;
   height = height - 360;
   currentPlaylistSection.style.height = height;
 }
+// Event Listener to check if user clicks on a menu option when the menu is open
 document.addEventListener('click', function(e){
   if(e.target == file_option){
     if(menuActive){
@@ -46,12 +48,14 @@ document.addEventListener('click', function(e){
     hideMenu()
   }
 })
+// Event Listener to listen for minimize window activity
 min_button.addEventListener('click', function(){
   ipcRender.send('minimize')
   if(menuActive){
     hideMenu()
   }
 })
+// Event Listener to listen for maximize window activity
 max_button.addEventListener('click', function(){
   if(isMaximized){
     ipcRender.send('unmaximize')
@@ -65,18 +69,21 @@ max_button.addEventListener('click', function(){
     hideMenu()
   }
 })
+// Event Listener to listen for close current song activity
 close_button.addEventListener('click', function(){
   ipcRender.send('close')
   if(menuActive){
     hideMenu()
   }
 })
+// Event Listener to listen for close window activity
 exit_button.addEventListener('click', function(){
   ipcRender.send('close')
   if(menuActive){
     hideMenu()
   }
 })
+// Event Listener to listen for open file activity
 open_file_btn.addEventListener('click', function(){
   hideMenu()
   // path = dialog.showOpenDialog({
@@ -94,12 +101,14 @@ open_file_btn.addEventListener('click', function(){
     }
   }
 })
+// Event Listener to listen for close file activity
 close_file_btn.addEventListener('click', function(){
   audio.pause();
   audio.currentTime = 0;
   audio.src = "";
   play_button.src = "../assets/images/controls/player/play.png";
 })
+// Event Listener to listen for play/pause song activity
 play_button.addEventListener('click', function(){
   if(audio){
     if(audio.paused){
@@ -112,12 +121,12 @@ play_button.addEventListener('click', function(){
     }
   }
 })
-
+// Function to close the menu
 function hideMenu(){
   file_menu.style.display = "none";
   menuActive = false;
 }
-
+// Function to start playing the selected songs
 function playFile(path){
   if(audio){
     audio.pause();
@@ -153,7 +162,7 @@ function playFile(path){
   });
   audio.muted = false;
 }
-
+// Function to start the seek
 function startSeek(){
   seek.max = songDuration;
   timeLeft = songDuration;
