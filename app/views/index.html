@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
   </head>
-  <body>
+  <body onresize="resizeContainer()" onload="resizeContainer()">
     <section class="titlebar">
       <p class="menu-item" id="file-menu-option">
         File
@@ -60,7 +60,7 @@
         <p class="side-menu-item">All Songs</p><hr class="side-menu-seperator">
         <p class="side-menu-item">Current Playlist</p>
       </div>
-      <div class="col-md-10 col-lg-10 col-sm-10 col-xs-12 current-playlist no-padding">
+      <div class="col-md-10 col-lg-10 col-sm-10 col-xs-12 current-playlist no-padding" id="current-playlist">
         <table style="width:100%;margin-top:30px;" class="table-hover">
           <thead>
             <tr>

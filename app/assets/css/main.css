@@ -10,6 +10,13 @@
 .no-padding{
   padding: 0px !important;
 }
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(179, 47, 29, 0.86);
+  border-radius: 5px;
+}
 body{
   background-repeat: no-repeat;
   background-size: cover;
@@ -104,7 +111,6 @@ body:hover{
   height: 70px;
   /*background: #b32f1d;*/
   background: rgba(179,47,29,0.75);
-  /*background: transparent*/
   padding-top: 25px;
   z-index: 100;
 }
@@ -184,6 +190,9 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: 20vh;
   font-size: 16px;
   letter-spacing: 1px;
+}
+.current-playlist{
+  overflow-y: auto;
 }
 tr{
   height: 45px;

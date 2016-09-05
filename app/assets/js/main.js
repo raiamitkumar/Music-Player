@@ -21,11 +21,17 @@ var albumCover = document.getElementById('album-banner');
 var songTitle = document.getElementById('song-title');
 var songAlbum = document.getElementById('song-album');
 var songArtist = document.getElementById('song-artist');
+var currentPlaylistSection = document.getElementById('current-playlist');
 var isMaximized = false;
 var menuActive = false, count = 0;
 var path = "";
 var songDuration, audio, timeLeft = 0, timePlayed = 0;
 
+function resizeContainer(){
+  var height = window.outerHeight;
+  height = height - 360;
+  currentPlaylistSection.style.height = height;
+}
 document.addEventListener('click', function(e){
   if(e.target == file_option){
     if(menuActive){
@@ -135,7 +141,7 @@ function playFile(path){
       var base64Data = base64ArrayBuffer( metadata.picture[0].data );
       albumCover.src = 'data:image/png;base64, ' + base64Data;
       var img = "url('data:image/png;base64, "+base64Data + "')";
-      document.getElementById('player-background').style.backgroundImage = img; 
+      document.getElementById('player-background').style.backgroundImage = img;
     }
   });
   songDuration = 0;
