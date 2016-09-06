@@ -101,10 +101,13 @@ add_file_btn.addEventListener('click', function(){
   toBeAdded = dialog.showOpenDialog({
     properties: ['openFile', 'multiSelections']
   })
-  songIndex = songIndex.concat(toBeAdded)
-  if(songIndex === songQueue.length - 1 && audio.ended){
-    songIndex++
-    playFile(songQueue[songIndex])
+  songQueue = songQueue.concat(toBeAdded)
+  if(toBeAdded.length > 0){
+    addToPlaylist(toBeAdded)
+    if(songIndex === songQueue.length - 1 && audio.ended){
+      songIndex++
+      playFile(songQueue[songIndex])
+    }
   }
 })
 // Event Listener to listen for close file activity
