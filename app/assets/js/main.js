@@ -23,16 +23,12 @@ var songTitle = document.getElementById('song-title');
 var songAlbum = document.getElementById('song-album');
 var songArtist = document.getElementById('song-artist');
 var currentPlaylistSection = document.getElementById('current-playlist');
-var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0, timePlayed = 0, songIndex = 0, intervalTime = 1000;;
+var volumeSeek = document.getElementById('volume-seek')
+var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0, timePlayed = 0, songIndex = 0, intervalTime = 1000, volume
 var songQueue = []
 var tableRow, rowElement, textElement
 
-// Function to check for the height of the window and recompute the height of the current playlist section
-function resizeContainer(){
-  var height = window.outerHeight;
-  height = height - 360;
-  currentPlaylistSection.style.height = height;
-}
+
 // Event Listener to check if user clicks on a menu option when the menu is open
 document.addEventListener('click', function(e){
   if(e.target == file_option){
@@ -132,6 +128,21 @@ play_button.addEventListener('click', function(){
     }
   }
 })
+$(document).ready(function(){
+  $(volumeSeek).change(function(){
+    volume = volumeSeek.value;
+    console.log(volume);
+    audio.volume = volume
+  })
+})
+
+
+// Function to check for the height of the window and recompute the height of the current playlist section
+function resizeContainer(){
+  var height = window.outerHeight;
+  height = height - 360;
+  currentPlaylistSection.style.height = height;
+}
 // Function to close the menu
 function hideMenu(){
   file_menu.style.display = "none";
@@ -170,7 +181,6 @@ function playFile(path){
       audio.play();
       startSeek();
   });
-  audio.muted = false;
 }
 // Function to start the seek
 function startSeek(){

@@ -130,6 +130,14 @@ body:hover{
   background-size: cover;
   z-index: 100;
 }
+.player-font-icons{
+  font-size: 20px !important;
+  margin-top: 2px !important;
+  color: #fff;
+}
+.volume-container{
+  float: right !important;
+}
 .controls{
   padding-left: 15px;
   padding-right: 15px;
@@ -162,7 +170,7 @@ input[type=range]::-webkit-slider-thumb {
   background: #fff;
   cursor: pointer;
   -webkit-appearance: none;
-  margin-top: -5.6px;
+  margin-top: -5.0px;
 }
 .current-song-info{
   position: absolute;
