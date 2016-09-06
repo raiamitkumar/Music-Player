@@ -24,7 +24,7 @@ var songAlbum = document.getElementById('song-album');
 var songArtist = document.getElementById('song-artist');
 var currentPlaylistSection = document.getElementById('current-playlist');
 var volumeSeek = document.getElementById('volume-seek')
-var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0, timePlayed = 0, songIndex = 0, intervalTime = 1000, volume
+var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0, timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false
 var songQueue = []
 var tableRow, rowElement, textElement
 
@@ -130,9 +130,17 @@ play_button.addEventListener('click', function(){
 })
 $(document).ready(function(){
   $(volumeSeek).change(function(){
-    volume = volumeSeek.value;
-    console.log(volume);
+    volume = volumeSeek.value
     audio.volume = volume
+  })
+  $(seek).mousedown(function(){
+    seeking = true
+  })
+  $(seek).mouseup(function(){
+    seeking = true
+  })
+  $(seek).change(function(){
+    audio.currentTime = seek.value
   })
 })
 
@@ -188,8 +196,10 @@ function startSeek(){
   timeLeft = songDuration;
   intervalTime = 1000;
   setInterval(function(){
-    // Updating seek value
-    seek.value = audio.currentTime;
+    if(!seeking){
+      // Updating seek value
+      seek.value = audio.currentTime;
+    }
     // Playing next file if the current song has ended
     if(audio.ended && songIndex < songQueue.length - 1){
       songIndex++;
