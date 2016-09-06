@@ -10,6 +10,10 @@
 .no-padding{
   padding: 0px !important;
 }
+.no-side-padding{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -233,5 +237,18 @@ tbody tr:hover{
   }
   .current-playlist {
       width: 80.333333% !important;
+  }
+  .control-container{
+      width: 4.333333% !important;
+  }
+}
+@media (min-width: 1200px){
+  .control-container{
+      width: 4.333333% !important;
+  }
+}
+@media (min-width: 992px){
+  .control-container{
+      width: 4.333333% !important;
   }
 }
