@@ -160,6 +160,7 @@ $(document).ready(function(){
   });
 })
 remove_file_btn.addEventListener('click', function(){
+  $("#playlist-body tr:nth-child("+ rightClickTarget +")").remove()
   rightClickTarget = rightClickTarget - 1
   songQueue.splice(rightClickTarget, 1)
   if(songIndex === rightClickTarget){
@@ -172,8 +173,6 @@ remove_file_btn.addEventListener('click', function(){
     }
   }
   $(file_options).css('display', 'none')
-  rightClickTarget = rightClickTarget + 1
-  $("#playlist-body tr:nth-child("+ rightClickTarget +")").remove()
 })
 
 
