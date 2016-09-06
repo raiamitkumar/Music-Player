@@ -24,7 +24,10 @@ var songAlbum = document.getElementById('song-album');
 var songArtist = document.getElementById('song-artist');
 var currentPlaylistSection = document.getElementById('current-playlist');
 var volumeSeek = document.getElementById('volume-seek')
-var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0, timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false
+var file_options = document.getElementById('file-options');
+var remove_file_btn = document.getElementById('remove-file-btn');
+var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0,
+  timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false, rightClickTarget, subMenuActive = false
 var songQueue = []
 var tableRow, rowElement, textElement
 
@@ -42,6 +45,11 @@ document.addEventListener('click', function(e){
   }
   else if(e.target !=file_menu && menuActive && e.target != min_button && e.target != max_button && e.target != close_button){
     hideMenu()
+  }
+
+  if(e.target != file_options && subMenuActive && e.target !=file_menu && menuActive && e.target != min_button && e.target != max_button && e.target != close_button){
+    file_options.style.display = "none";
+    subMenuActive = false;
   }
 })
 // Event Listener to listen for minimize window activity
@@ -137,11 +145,35 @@ $(document).ready(function(){
     seeking = true
   })
   $(seek).mouseup(function(){
-    seeking = true
+    seeking = false
   })
   $(seek).change(function(){
     audio.currentTime = seek.value
   })
+  $("#playlist-body").on("contextmenu", "tr", function (event) {
+    rightClickTarget = $("#playlist-body tr").index(this)
+    rightClickTarget = rightClickTarget + 1
+    var topOffset = $("#playlist-body tr:nth-child("+ rightClickTarget +")").offset().top
+    subMenuActive = true
+    $(file_options).css('top', topOffset)
+    $(file_options).css('display', 'block')
+  });
+})
+remove_file_btn.addEventListener('click', function(){
+  rightClickTarget = rightClickTarget - 1
+  songQueue.splice(rightClickTarget, 1)
+  if(songIndex === rightClickTarget){
+    if(songIndex < songQueue.length - 1){
+      playFile(songQueue[songIndex])
+    }
+    else{
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }
+  $(file_options).css('display', 'none')
+  rightClickTarget = rightClickTarget + 1
+  $("#playlist-body tr:nth-child("+ rightClickTarget +")").remove()
 })
 
 
@@ -189,6 +221,7 @@ function playFile(path){
       audio.play();
       startSeek();
   });
+  audio.muted = true
 }
 // Function to start the seek
 function startSeek(){
@@ -226,6 +259,7 @@ function addToPlaylist(songsList){
         textElement = document.createTextNode(tags.artist)
         rowElement.appendChild(textElement)
         tableRow.appendChild(rowElement)
+        tableRow.setAttribute("id", i);
         document.getElementById('playlist-body').appendChild(tableRow)
       }
     });
