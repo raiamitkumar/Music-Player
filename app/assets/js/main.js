@@ -14,6 +14,7 @@ var file_menu = document.getElementById('file-menu');
 var open_button = document.getElementById('open');
 var open_file_btn = document.getElementById('open-file-btn');
 var close_file_btn = document.getElementById('close-file-btn');
+var add_file_btn = document.getElementById('add-file-btn');
 var exit_button = document.getElementById('exit-btn');
 var play_button = document.getElementById('play-button');
 var seek = document.getElementById('seek');
@@ -22,10 +23,9 @@ var songTitle = document.getElementById('song-title');
 var songAlbum = document.getElementById('song-album');
 var songArtist = document.getElementById('song-artist');
 var currentPlaylistSection = document.getElementById('current-playlist');
-var isMaximized = false;
-var menuActive = false, count = 0;
-var path = "";
-var songDuration, audio, timeLeft = 0, timePlayed = 0;
+var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0, timePlayed = 0, songIndex = 0, intervalTime = 1000;;
+var songQueue = []
+var tableRow, rowElement, textElement
 
 // Function to check for the height of the window and recompute the height of the current playlist section
 function resizeContainer(){
@@ -86,27 +86,35 @@ exit_button.addEventListener('click', function(){
 // Event Listener to listen for open file activity
 open_file_btn.addEventListener('click', function(){
   hideMenu()
-  // path = dialog.showOpenDialog({
-  //     properties: ['openFile', 'multiSelections']
-  // });
-  path = dialog.showOpenDialog({
-      properties: ['openFile']
+  songQueue = dialog.showOpenDialog({
+      properties: ['openFile', 'multiSelections']
   });
-  if(path.length > 0){
-    if(path.length === 1){
-      playFile(path);
-    }
-    else{
-      playMultiFiles(path);
-    }
+  songIndex = 0
+  if(songQueue.length > 0){
+    addToPlaylist(songQueue)
+    playFile(songQueue[songIndex])
+  }
+})
+// Event Listener to listen for add file activity
+add_file_btn.addEventListener('click', function(){
+  hideMenu()
+  toBeAdded = dialog.showOpenDialog({
+    properties: ['openFile', 'multiSelections']
+  })
+  songIndex = songIndex.concat(toBeAdded)
+  if(songIndex === songQueue.length - 1 && audio.ended){
+    songIndex++
+    playFile(songQueue[songIndex])
   }
 })
 // Event Listener to listen for close file activity
 close_file_btn.addEventListener('click', function(){
-  audio.pause();
-  audio.currentTime = 0;
-  audio.src = "";
-  play_button.src = "../assets/images/controls/player/play.png";
+  if(audio){
+    audio.pause()
+    audio.currentTime = 0
+    audio.src = ""
+  }
+  play_button.src = "../assets/images/controls/player/play.png"
 })
 // Event Listener to listen for play/pause song activity
 play_button.addEventListener('click', function(){
@@ -137,7 +145,6 @@ function playFile(path){
   // Getting metadata for the audio file
   id3({ file: path.toString(), type: id3.OPEN_LOCAL }, function(err, tags) {
     if(tags){
-      console.log(tags);
       songTitle.innerHTML = tags.title;
       songAlbum.innerHTML = tags.album;
       songArtist.innerHTML = tags.artist;
@@ -166,12 +173,38 @@ function playFile(path){
 function startSeek(){
   seek.max = songDuration;
   timeLeft = songDuration;
+  intervalTime = 1000;
   setInterval(function(){
-    if(timeLeft >= 0){
-      timePlayed = songDuration - timeLeft;
-      seek.value = timePlayed;
-      var a = timePlayed/songDuration;
-      timeLeft--;
+    // Updating seek value
+    seek.value = audio.currentTime;
+    // Playing next file if the current song has ended
+    if(audio.ended && songIndex < songQueue.length - 1){
+      songIndex++;
+      playFile(songQueue[songIndex])
     }
-  }, 1000)
+  }, intervalTime)
+}
+// Function to add the selected songs to the playlist and reflect them in the view
+function addToPlaylist(songsList){
+  for(var i=0; i<songsList.length; i++){
+    // Getting metadata for the audio file
+    id3({ file: songsList[i].toString(), type: id3.OPEN_LOCAL }, function(err, tags) {
+      if(tags){
+        tableRow = document.createElement("tr")
+        rowElement = document.createElement("td")
+        textElement = document.createTextNode(tags.title)
+        rowElement.appendChild(textElement)
+        tableRow.appendChild(rowElement)
+        rowElement = document.createElement("td")
+        textElement = document.createTextNode(tags.album)
+        rowElement.appendChild(textElement)
+        tableRow.appendChild(rowElement)
+        rowElement = document.createElement("td")
+        textElement = document.createTextNode(tags.artist)
+        rowElement.appendChild(textElement)
+        tableRow.appendChild(rowElement)
+        document.getElementById('playlist-body').appendChild(tableRow)
+      }
+    });
+  }
 }
