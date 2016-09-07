@@ -1,5 +1,4 @@
-var electron = require('electron');
-var ipcRender = electron.ipcRenderer;
+var electron = require('electron'), ipcRender = electron.ipcRenderer, ipcMainClient = electron.ipcMain
 var remote = electron.remote;
 var dialog = remote.require('electron').dialog;
 var fs = require('fs');
@@ -293,3 +292,70 @@ function addToPlaylist(songsList){
     });
   }
 }
+
+// Listening for IPC Messages for playing next song
+ipcRender.on('playNext', ()=>{
+  if(audio){
+    if(songIndex < songQueue.length - 1){
+      songIndex++
+      playFile(songQueue[songIndex])
+    }
+    else{
+      if(repeat === 1){
+        songIndex = 0
+        playFile(songQueue[songIndex])
+      }
+    }
+  }
+  else{
+    alert('Choot ke Pyaase, Sab daba le abhi. Pehle do teen gaane select karle')
+  }
+})
+// Listening for IPC Messages for playing previous song
+ipcRender.on('playPrevious', ()=>{
+  if(audio){
+    if(songIndex > 0){
+      songIndex--
+      playFile(songQueue[songIndex])
+    }
+    else{
+      if(repeat === 1){
+        songIndex = songQueue.length - 1
+        playFile(songQueue[songIndex])
+      }
+    }
+  }
+  else{
+    alert('Choot ke Pyaase, Sab daba le abhi. Pehle do teen gaane select karle')
+  }
+})
+// Listening for IPC Messages for playing previous song
+ipcRender.on('pause', ()=>{
+  if(audio){
+    if(audio.paused){
+      audio.play()
+    }
+    else{
+      audio.pause()
+    }
+  }
+  else{
+    alert('Choot ke Pyaase, Sab daba le abhi. Pehle do teen gaane select karle')
+  }
+})
+// Listening for IPC Messages for increasing volume
+ipcRender.on('volumeUp', ()=>{
+  volume = volumeSeek.value
+  volume++
+  audio.volume = volume
+  volumeSeek.value = volume
+})
+// Listening for IPC Messages for decreasing volume
+ipcRender.on('volumeDown', ()=>{
+  volume = volumeSeek.value
+  if(volume > 0){
+    volume--
+  }
+  audio.volume = volume
+  volumeSeek.value = volume
+})
