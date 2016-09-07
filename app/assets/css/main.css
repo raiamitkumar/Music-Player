@@ -143,6 +143,19 @@ body:hover{
   padding-right: 15px;
   padding-top: 20px;
 }
+.repeat-control-icon{
+  border: 1px solid rgba(255,255,255,0);
+  padding: 5px;
+  margin-top: -2px !important;
+  border-radius: 30px;
+  font-size: 16px !important;
+  width: 30px;
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+}
+.repeat-control-icon:hover{
+  cursor: pointer;
+}
 input[type=range] {
   -webkit-appearance: none;
   margin-top: 12px;

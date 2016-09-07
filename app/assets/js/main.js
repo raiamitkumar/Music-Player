@@ -26,8 +26,9 @@ var currentPlaylistSection = document.getElementById('current-playlist');
 var volumeSeek = document.getElementById('volume-seek')
 var file_options = document.getElementById('file-options');
 var remove_file_btn = document.getElementById('remove-file-btn');
+var repeat_btn = document.getElementById('repeat-btn')
 var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0,
-  timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false, rightClickTarget, subMenuActive = false
+  timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false, rightClickTarget, subMenuActive = false, repeat = 0
 var songQueue = []
 var tableRow, rowElement, textElement
 
@@ -174,6 +175,24 @@ remove_file_btn.addEventListener('click', function(){
   }
   $(file_options).css('display', 'none')
 })
+repeat_btn.addEventListener('click', function(){
+  repeat++
+  if(repeat === 3){
+    repeat = 0
+  }
+  switch (repeat) {
+    case 0:
+      $(repeat_btn).css('border', '1px solid rgba(255,255,255,0)')
+      $(repeat_btn).css('color', 'rgba(255,255,255,0.6)')
+      break;
+    case 1:
+      $(repeat_btn).css('color', 'rgba(255,255,255,1)')
+      break;
+    case 2:
+      $(repeat_btn).css('border', '1px solid rgba(255,255,255,1)')
+      break;
+  }
+})
 
 
 // Function to check for the height of the window and recompute the height of the current playlist section
@@ -220,7 +239,7 @@ function playFile(path){
       audio.play();
       startSeek();
   });
-  audio.muted = true
+  // audio.muted = true
 }
 // Function to start the seek
 function startSeek(){
@@ -233,8 +252,18 @@ function startSeek(){
       seek.value = audio.currentTime;
     }
     // Playing next file if the current song has ended
-    if(audio.ended && songIndex < songQueue.length - 1){
-      songIndex++;
+    if(audio.ended && songIndex < songQueue.length){
+      if(songIndex === songQueue.length - 1 && repeat === 1){
+        songIndex = 0
+      }
+      else if(repeat === 2){
+        songIndex = songIndex
+      }
+      else{
+        if(songIndex < songQueue.length - 1){
+          songIndex++
+        }
+      }
       playFile(songQueue[songIndex])
     }
   }, intervalTime)
