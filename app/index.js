@@ -52,17 +52,17 @@ function createMainWindow() {
   globalShortcut.register('CommandOrControl+Alt+Up', ()=>{
     win.webContents.send( 'volumeUp' );
   })
-  globalShortcut.register('VolumeUp', ()=>{
-    win.webContents.send( 'volumeUp' );
-  })
+  // globalShortcut.register('VolumeUp', ()=>{
+  //   win.webContents.send( 'volumeUp' );
+  // })
 
   // Global Shortcut for Increasing Volume
   globalShortcut.register('CommandOrControl+Alt+Down', ()=>{
     win.webContents.send( 'volumeDown' );
   })
-  globalShortcut.register('VolumeDown', ()=>{
-    win.webContents.send( 'volumeDown' );
-  })
+  // globalShortcut.register('VolumeDown', ()=>{
+  //   win.webContents.send( 'volumeDown' );
+  // })
 
 
   // Listening for window minimize event call

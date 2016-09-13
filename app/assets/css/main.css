@@ -60,6 +60,7 @@ body:hover{
   box-shadow: 0px 0px 20px #000;
   overflow: hidden;
   display: none;
+  z-index: 9;
 }
 #file-menu p{
   line-height: 25px;
@@ -124,7 +125,7 @@ body:hover{
   bottom: 0px;
   width: 100vw;
   height: 70px;
-  background-image: url('file:///E:/Tamasha-Bollywood-movie-Official-Trailer-Released.jpg');
+  background-image: url('file:///E:/Newfolder/Tamasha-Bollywood-movie-Official-Trailer-Released.jpg');
   -webkit-filter: blur(10px);
   background-repeat: no-repeat;
   background-size: cover;
@@ -280,6 +281,73 @@ tbody tr:hover{
   margin-bottom: 0px;
   border-top: 1px solid #b7b7b7;
 }
+.playlist-name-form{
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  height: 300px;
+  background: #fff;
+  z-index: 999;
+  width: 100%;
+  box-shadow: 0px 0px 20px #7d7d7d;
+  border: 1px solid #fff;
+  -webkit-animation: slideUp 0.2s;
+}
+.playlist-name-form-hidden{
+  position: fixed;
+  bottom: -250px;
+  left: 0px;
+  height: 250px;
+  z-index: 999;
+  width: 100%;
+  background: #fff;
+  -webkit-animation: slideDown 0.4s;
+}
+.black-overlay{
+  position: fixed;
+  top: 33px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  -webkit-animation: fadeIn 0.2s;
+}
+.black-overlay-faded{
+  position: fixed;
+  top: 33px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0);
+  -webkit-animation: fadeOut 0.2s;
+}
+.playlist-form-header{
+  text-align: center;
+  margin-top: 40px;
+}
+#playlist-name-input{
+  margin-top: 30px;
+  width: 325px;
+  padding: 6px;
+  border: 1px solid #888;
+  border-radius: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+  outline: none;
+}
+#playlist-name-submit{
+  margin-top: 20px;
+  width: 200px;
+  height: 34px;
+  border: none;
+  color: #fff;
+  background: rgb(208, 71, 52);
+  border-radius: 5px;
+  outline: none;
+}
+.error-message{
+  text-align: center;
+  margin-top: 35px;
+  color: #d04734;
+}
 @media (min-width: 768px){
   .side-menu {
       width: 19.66666667% !important;
@@ -299,5 +367,37 @@ tbody tr:hover{
 @media (min-width: 992px){
   .control-container{
       width: 4.333333% !important;
+  }
+}
+@keyframes slideUp {
+  from{
+    bottom: -250px;
+  }
+  to{
+    bottom: 0px;
+  }
+}
+@keyframes slideDown {
+  from{
+    bottom: 0px;
+  }
+  to{
+    bottom: -250px;
+  }
+}
+@keyframes fadeIn {
+  from{
+    background: rgba(0, 0, 0, 0);
+  }
+  to{
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+@keyframes fadeOut {
+  from{
+    background: rgba(0, 0, 0, 0.3);
+  }
+  to{
+    background: rgba(0, 0, 0, 0);
   }
 }

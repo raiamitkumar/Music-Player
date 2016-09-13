@@ -12,11 +12,14 @@ var min_button = document.getElementById('minimize'), max_button = document.getE
   songAlbum = document.getElementById('song-album'), songArtist = document.getElementById('song-artist'),
   currentPlaylistSection = document.getElementById('current-playlist'), volumeSeek = document.getElementById('volume-seek'),
   file_options = document.getElementById('file-options'), remove_file_btn = document.getElementById('remove-file-btn'),
-  repeat_btn = document.getElementById('repeat-btn')
+  repeat_btn = document.getElementById('repeat-btn'), syncFileBtn = document.getElementById('sync-file-btn'),
+  savePlaylistBtn = document.getElementById('save-playlist-btn'), blackOverlay = document.getElementById('black-overlay'),
+  playlistForm = document.getElementById('get-playlist-name-form'), playlistSubmtBtn = document.getElementById('playlist-name-submit')
+  playlistInput = document.getElementById('playlist-name-input')
 
 var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0,
   timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false, rightClickTarget, subMenuActive = false,
-  repeat = 0, songQueue = [], tableRow, rowElement, textElement, storage = window.localStorage
+  repeat = 0, songQueue = [], tableRow, rowElement, textElement, storage = window.localStorage, savedPlaylists = []
 
 
 // Event Listener to check if user clicks on a menu option when the menu is open
@@ -151,7 +154,7 @@ $(document).ready(function(){
     subMenuActive = true
     $(file_options).css('top', topOffset)
     $(file_options).css('display', 'block')
-  });
+  })
 })
 remove_file_btn.addEventListener('click', function(){
   $("#playlist-body tr:nth-child("+ rightClickTarget +")").remove()
@@ -186,7 +189,21 @@ repeat_btn.addEventListener('click', function(){
       break
   }
 })
+savePlaylistBtn.addEventListener('click', function(){
+  playlistForm.className = "playlist-name-form"
+  blackOverlay.className = "black-overlay"
+})
+playlistSubmtBtn.addEventListener('click', function(){
+  var name
+  if(playlistInput.value){
+    name = playlistInput.value
+    playlistForm.className = "playlist-name-form-hidden"
+    blackOverlay.className = ""
+  }
+  else{
 
+  }
+})
 
 // Function to check for the height of the window and recompute the height of the current playlist section
 function resizeContainer(){
@@ -287,6 +304,19 @@ function addToPlaylist(songsList){
     });
   }
 }
+// Function to save the playlist
+function savePlaylist(playListName){
+  if(storage.getItem('playlists')){
+    savedPlaylists = JSON.parse(storage.getItem('playlists'))
+  }
+  newPlaylist = {
+    'name': playListName,
+    'songs': songQueue
+  }
+  savedPlaylists.push(newPlaylist)
+  storage.setItem('playlists', JSON.stringify(savedPlaylists))
+}
+
 
 // Listening for IPC Messages for playing next song
 ipcRender.on('playNext', ()=>{

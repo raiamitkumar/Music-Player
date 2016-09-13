@@ -19,7 +19,7 @@
     </section>
 
     <div class="album-banner-container">
-      <img class="album-banner" id="album-banner" src="file:///E:/Tamasha-Bollywood-movie-Official-Trailer-Released.jpg" />
+      <img class="album-banner" id="album-banner" src="file:///E:/Newfolder/Tamasha-Bollywood-movie-Official-Trailer-Released.jpg" />
       <div class="tint">
       </div>
       <div class="container-fluid current-song-info">
@@ -89,12 +89,26 @@
     <section id="file-menu">
       <p id="open-file-btn">Open</p>
       <p id="add-file-btn">Add</p>
+      <p id="save-playlist-btn">Save Playlist</p>
       <p id="close-file-btn">Close</p>
       <p id="exit-btn">Exit</p>
     </section>
 
     <section id="file-options">
       <p id="remove-file-btn">Remove</p>
+    </section>
+
+    <section id="black-overlay"></section>
+
+    <section id="get-playlist-name-form">
+      <h3 class="playlist-form-header">Let's name this collection</h3>
+      <p style="text-align:center">
+        <input type="text" name="name" id="playlist-name-input" placeholder="Enter a Name">
+      </p>
+      <p style="text-align:center">
+        <input type="submit" id="playlist-name-submit" value="Save Playlist">
+      </p>
+      <p class="error-message">Let's not play games here. We need a valid name here buddy. One having atleast 1 character</p>
     </section>
     <script type="text/javascript">
       window.$ = window.jQuery = require('../assets/js/jquery-2.1.4.min.js');
