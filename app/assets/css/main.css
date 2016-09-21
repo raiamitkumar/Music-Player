@@ -347,6 +347,7 @@ tbody tr:hover{
   text-align: center;
   margin-top: 35px;
   color: #d04734;
+  display: none;
 }
 @media (min-width: 768px){
   .side-menu {

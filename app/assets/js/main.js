@@ -15,11 +15,12 @@ var min_button = document.getElementById('minimize'), max_button = document.getE
   repeat_btn = document.getElementById('repeat-btn'), syncFileBtn = document.getElementById('sync-file-btn'),
   savePlaylistBtn = document.getElementById('save-playlist-btn'), blackOverlay = document.getElementById('black-overlay'),
   playlistForm = document.getElementById('get-playlist-name-form'), playlistSubmtBtn = document.getElementById('playlist-name-submit')
-  playlistInput = document.getElementById('playlist-name-input')
+  playlistInput = document.getElementById('playlist-name-input'), errorMsg = document.getElementById('error-message')
 
 var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0,
   timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false, rightClickTarget, subMenuActive = false,
-  repeat = 0, songQueue = [], tableRow, rowElement, textElement, storage = window.localStorage, savedPlaylists = []
+  repeat = 0, songQueue = [], tableRow, rowElement, textElement, storage = window.localStorage, savedPlaylists = [],
+  savePlaylistDialogOpen = false
 
 
 // Event Listener to check if user clicks on a menu option when the menu is open
@@ -192,16 +193,24 @@ repeat_btn.addEventListener('click', function(){
 savePlaylistBtn.addEventListener('click', function(){
   playlistForm.className = "playlist-name-form"
   blackOverlay.className = "black-overlay"
+  savePlaylistDialogOpen = true
 })
 playlistSubmtBtn.addEventListener('click', function(){
   var name
   if(playlistInput.value){
     name = playlistInput.value
     playlistForm.className = "playlist-name-form-hidden"
-    blackOverlay.className = ""
+    blackOverlay.className = "black-overlay-faded"
+    savePlaylist(name)
   }
   else{
-
+    errorMsg.style.display = "block"
+  }
+})
+blackOverlay.addEventListener('click', function(){
+  if(savePlaylistDialogOpen){
+    playlistForm.className = "get-playlist-name-form-hidden"
+    blackOverlay.className = "black-overlay-faded"
   }
 })
 
@@ -235,7 +244,7 @@ function playFile(path){
 
   // Getting Album Cover of the audio file
   musicmetadata(fs.createReadStream(path.toString()), function (err, metadata) {
-    if(!err && metadata.picture[0].data){
+    if(!err && metadata){
       var base64Data = base64ArrayBuffer( metadata.picture[0].data )
       albumCover.src = 'data:image/png;base64, ' + base64Data
       var img = "url('data:image/png;base64, "+base64Data + "')"
@@ -315,6 +324,8 @@ function savePlaylist(playListName){
   }
   savedPlaylists.push(newPlaylist)
   storage.setItem('playlists', JSON.stringify(savedPlaylists))
+  console.log('here');
+  console.log(storage.getItem('playlists'))
 }
 
 
