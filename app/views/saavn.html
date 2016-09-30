@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Player</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/font-awesome.css">
+  </head>
+  <body onresize="resizeContainer()" onload="resizeContainer()">
+    <section class="titlebar">
+      <p class="menu-item" id="file-menu-option">
+        File
+      </p>
+      <div class="window-controls">
+        <img src="../assets/images/controls/window/min-black.png" class="window-control-button" id="minimize" style="width:18px;">
+        <img src="../assets/images/controls/window/max-black.png" class="window-control-button" id="maximize" style="width:17px;">
+        <img src="../assets/images/controls/window/close-black.png" class="window-control-button" id="close">
+      </div>
+    </section>
+
+    <object type="text/html" data="http://saavn.com/" width="100%" style="margin-top: 35px;height: 100vh;">
+    </object>
+
+    <section id="file-menu">
+      <p id="open-local-station-btn" onclick="openLocal()">Local Station</p>
+      <p id="close-file-btn">Close</p>
+      <p id="exit-btn">Exit</p>
+    </section>
+
+    <script type="text/javascript">
+      window.$ = window.jQuery = require('../assets/js/jquery-2.1.4.min.js');
+      function openLocal(){
+        window.location.href = "index.html"
+      }
+    </script>
+    <script type="text/javascript" src="../assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../assets/js/base64.js"></script>
+    <script type="text/javascript" src="../assets/js/main.js"></script>
+  </body>
+</html>

@@ -68,7 +68,8 @@
     <div class="container-fluid no-padding">
       <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 side-menu no-padding">
         <p class="side-menu-item" id="current-playlist-option">Current Playlist</p><hr class="side-menu-seperator">
-        <p class="side-menu-item" id="saved-playlist-option">Saved Playlists</p>
+        <p class="side-menu-item" id="saved-playlist-option">Saved Playlists</p><hr class="side-menu-seperator">
+        <p class="side-menu-item" id="saavn-station" onclick="openSaavn()">Saavan</p>
       </div>
       <div class="col-md-10 col-lg-10 col-sm-10 col-xs-12 current-playlist no-padding" id="current-playlist">
         <table style="width:100%;margin-top:30px;" class="table-hover">
@@ -124,6 +125,9 @@
     </section>
     <script type="text/javascript">
       window.$ = window.jQuery = require('../assets/js/jquery-2.1.4.min.js');
+      function openSaavn(){
+        window.location.href = "saavn.html"
+      }
     </script>
     <script type="text/javascript" src="../assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="../assets/js/base64.js"></script>

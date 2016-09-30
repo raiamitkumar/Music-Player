@@ -219,6 +219,7 @@ savedPlaylistOption.addEventListener('click', function(){
   currentPlaylistSection.style.display = "none"
 })
 
+
 // Function to check for the height of the window and recompute the height of the current playlist section
 function resizeContainer(){
   var height = window.outerHeight
