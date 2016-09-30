@@ -18,7 +18,7 @@
     width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(179, 47, 29, 0.86);
+  background-color: rgb(130, 75, 162);
   border-radius: 5px;
 }
 body{
@@ -114,7 +114,7 @@ body:hover{
   bottom: 0px;
   width: 100vw;
   height: 70px;
-  background: rgba(130, 75, 162, 0.7);
+  background: rgba(130, 75, 162, 0.8);
   padding-top: 25px;
   z-index: 100;
 }
