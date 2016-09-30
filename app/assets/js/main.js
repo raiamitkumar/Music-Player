@@ -10,12 +10,14 @@ var min_button = document.getElementById('minimize'), max_button = document.getE
   play_button = document.getElementById('play-button'), seek = document.getElementById('seek'),
   albumCover = document.getElementById('album-banner'), songTitle = document.getElementById('song-title'),
   songAlbum = document.getElementById('song-album'), songArtist = document.getElementById('song-artist'),
-  currentPlaylistSection = document.getElementById('current-playlist'), volumeSeek = document.getElementById('volume-seek'),
-  file_options = document.getElementById('file-options'), remove_file_btn = document.getElementById('remove-file-btn'),
-  repeat_btn = document.getElementById('repeat-btn'), syncFileBtn = document.getElementById('sync-file-btn'),
-  savePlaylistBtn = document.getElementById('save-playlist-btn'), blackOverlay = document.getElementById('black-overlay'),
-  playlistForm = document.getElementById('get-playlist-name-form'), playlistSubmtBtn = document.getElementById('playlist-name-submit')
-  playlistInput = document.getElementById('playlist-name-input'), errorMsg = document.getElementById('error-message')
+  currentPlaylistSection = document.getElementById('current-playlist'), savedPlaylistsSection = document.getElementById('saved-playlist'),
+  volumeSeek = document.getElementById('volume-seek'), file_options = document.getElementById('file-options'),
+  remove_file_btn = document.getElementById('remove-file-btn'), repeat_btn = document.getElementById('repeat-btn'),
+  syncFileBtn = document.getElementById('sync-file-btn'), savePlaylistBtn = document.getElementById('save-playlist-btn'),
+  blackOverlay = document.getElementById('black-overlay'), playlistForm = document.getElementById('get-playlist-name-form'),
+  playlistSubmtBtn = document.getElementById('playlist-name-submit'), playlistInput = document.getElementById('playlist-name-input'),
+  errorMsg = document.getElementById('error-message'), currentPlaylistOption = document.getElementById('current-playlist-option'),
+  savedPlaylistOption = document.getElementById('saved-playlist-option')
 
 var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0,
   timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false, rightClickTarget, subMenuActive = false,
@@ -212,6 +214,9 @@ blackOverlay.addEventListener('click', function(){
     playlistForm.className = "get-playlist-name-form-hidden"
     blackOverlay.className = "black-overlay-faded"
   }
+})
+savedPlaylistOption.addEventListener('click', function(){
+  currentPlaylistSection.style.display = "none"
 })
 
 // Function to check for the height of the window and recompute the height of the current playlist section

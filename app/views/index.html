@@ -67,8 +67,8 @@
     <!-- <p class="playlist-end-message">Hey, looks like you've reached the end of the playlist. Let's add some more songs!</p> -->
     <div class="container-fluid no-padding">
       <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 side-menu no-padding">
-        <p class="side-menu-item">All Songs</p><hr class="side-menu-seperator">
-        <p class="side-menu-item">Current Playlist</p>
+        <p class="side-menu-item" id="current-playlist-option">Current Playlist</p><hr class="side-menu-seperator">
+        <p class="side-menu-item" id="saved-playlist-option">Saved Playlists</p>
       </div>
       <div class="col-md-10 col-lg-10 col-sm-10 col-xs-12 current-playlist no-padding" id="current-playlist">
         <table style="width:100%;margin-top:30px;" class="table-hover">
@@ -77,6 +77,18 @@
               <td>Name</td>
               <td>Album</td>
               <td>Artist</td>
+            </tr>
+          </thead>
+          <tbody id="playlist-body">
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-10 col-lg-10 col-sm-10 col-xs-12 current-playlist no-padding" id="saved-playlist">
+        <table style="width:100%;margin-top:30px;" class="table-hover">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Duration</td>
             </tr>
           </thead>
           <tbody id="playlist-body">

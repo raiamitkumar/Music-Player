@@ -38,7 +38,7 @@ body:hover{
   width: 100vw;
   height: 35px;
   -webkit-app-region: drag;
-  background-color: #f5f5f5;
+  background-color: #fff;
   z-index: 10;
 }
 .menu-item{
@@ -101,7 +101,7 @@ body:hover{
   left: 0px;
   width: 100vw;
   height: 250px;
-  background: rgba(179,47,29,0.65);
+  background: -webkit-linear-gradient(rgba(251,184,111,.7), rgb(130, 75, 162));
 }
 .album-banner{
   width: 100vw;
@@ -114,8 +114,7 @@ body:hover{
   bottom: 0px;
   width: 100vw;
   height: 70px;
-  /*background: #b32f1d;*/
-  background: rgba(179,47,29,0.75);
+  background: rgba(130, 75, 162, 0.7);
   padding-top: 25px;
   z-index: 100;
 }
@@ -219,6 +218,9 @@ input[type=range]::-webkit-slider-thumb {
 }
 .current-playlist{
   overflow-y: auto;
+}
+.saved-playlist{
+  display: none;
 }
 tr{
   height: 45px;
