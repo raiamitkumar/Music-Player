@@ -115,6 +115,8 @@ close_file_btn.addEventListener('click', function(){
     audio.src = ""
   }
   play_button.src = "../assets/images/controls/player/play.png"
+  songQueue = []
+  $("#playlist-body tr").remove()
 })
 // Event Listener to listen for play/pause song activity
 play_button.addEventListener('click', function(){
