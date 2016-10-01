@@ -1,6 +1,7 @@
 var electron = require('electron'), ipcRender = electron.ipcRenderer, ipcMainClient = electron.ipcMain,
   remote = electron.remote, dialog = remote.require('electron').dialog, fs = require('fs'),
-  id3 = require('id3js'), musicmetadata = require('musicmetadata'), audioMetaData = require('audio-metadata')
+  id3 = require('id3js'), musicmetadata = require('musicmetadata'), audioMetaData = require('audio-metadata'),
+  notifier = require('electron-notifications')
 
 var min_button = document.getElementById('minimize'), max_button = document.getElementById('maximize'),
   close_button = document.getElementById('close'), file_option = document.getElementById('file-menu-option'),
@@ -22,7 +23,7 @@ var min_button = document.getElementById('minimize'), max_button = document.getE
 var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0,
   timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false, rightClickTarget, subMenuActive = false,
   repeat = 0, songQueue = [], tableRow, rowElement, textElement, storage = window.localStorage, savedPlaylists = [],
-  savePlaylistDialogOpen = false
+  savePlaylistDialogOpen = false, notInFocus = false
 
 
 // Event Listener to check if user clicks on a menu option when the menu is open
@@ -160,6 +161,12 @@ $(document).ready(function(){
     $(file_options).css('top', topOffset)
     $(file_options).css('display', 'block')
   })
+  $(window).blur(function(){
+    notInFocus = true
+  });
+  $(window).focus(function(){
+    notInFocus = false
+  });
 })
 remove_file_btn.addEventListener('click', function(){
   $("#playlist-body tr:nth-child("+ rightClickTarget +")").remove()
@@ -276,8 +283,15 @@ function playFile(path){
       songDuration = audio.duration
       play_button.src = "../assets/images/controls/player/pause.png"
       audio.volume = volumeSeek.value
-      audio.play()
-      startSeek()
+      if(notInFocus){
+        notifier.notify('Player', {
+          message: 'Now Playing - ' + songTitle.innerHTML
+        })
+      }
+      setTimeout(function(){
+        audio.play()
+        startSeek()
+      }, 1000)
   });
   // audio.muted = true
 }

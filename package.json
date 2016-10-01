@@ -22,6 +22,7 @@
   "dependencies": {
     "audio-metadata": "^0.3.0",
     "electron-debug": "^1.0.0",
+    "electron-notifications": "^0.1.1",
     "id3js": "^1.1.3",
     "musicmetadata": "^2.0.4"
   },
