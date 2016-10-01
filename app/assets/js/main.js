@@ -167,11 +167,23 @@ remove_file_btn.addEventListener('click', function(){
   songQueue.splice(rightClickTarget, 1)
   if(songIndex === rightClickTarget){
     if(songIndex < songQueue.length - 1){
+      songIndex++
       playFile(songQueue[songIndex])
     }
     else{
-      audio.pause()
-      audio.currentTime = 0
+      if(repeat === 1){
+        songIndex = 0
+        playFile(songQueue[songIndex])
+      }
+      else if(repeat === 2 && songIndex - 1 > 0){
+        songIndex--
+        playFile(songQueue[songIndex])
+      }
+      else{
+        audio.pause()
+        audio.currentTime = 0
+        play_button.src = "../assets/images/controls/player/pause.png"
+      }
     }
   }
   $(file_options).css('display', 'none')

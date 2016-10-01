@@ -76,7 +76,7 @@ body:hover{
 }
 #file-menu p:hover{
   color:#fff;
-  background: #b32f1d;
+  background: #8944b8;
 }
 .window-controls{
   padding: 8px;
@@ -255,7 +255,7 @@ tbody tr:hover{
 }
 #file-options p:hover{
   color:#fff;
-  background: #b32f1d;
+  background: #8944b8;
   cursor: pointer;
 }
 .side-menu{
@@ -281,7 +281,7 @@ tbody tr:hover{
   width: 90%;
   margin-top: 0px;
   margin-bottom: 0px;
-  border-top: 1px solid #b7b7b7;
+  border-top: 1px solid #e0e0e0;
 }
 .playlist-name-form{
   position: fixed;
