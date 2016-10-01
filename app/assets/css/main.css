@@ -93,7 +93,7 @@ body:hover{
   height: 250px;
   overflow: hidden;
   margin-top: 30px;
-  box-shadow: 0px 0px 25px #696969;
+  box-shadow: 0px 0px 25px #8a8a8a;
 }
 .tint{
   position: fixed;
@@ -101,8 +101,7 @@ body:hover{
   left: 0px;
   width: 100vw;
   height: 250px;
-  /*background: -webkit-linear-gradient(rgba(251,184,111,.7), rgb(130, 75, 162));*/
-  background: rgba(91, 78, 234, 0.75);
+  background: rgba(124, 78, 234, 0.75);
 }
 .album-banner{
   width: 100vw;
@@ -115,15 +114,14 @@ body:hover{
   bottom: 0px;
   width: 100vw;
   height: 70px;
-  /*background: rgba(130, 75, 162, 0.8);*/
-  background: rgba(91, 78, 234, 0.8);
+  background: rgba(124, 78, 234, 0.9);
   padding-top: 25px;
   z-index: 100;
 }
 .player-background{
   position: fixed;
   left: 0px;
-  bottom: 0px;
+  bottom: -8px;
   width: 100vw;
   height: 70px;
   background-image: url('file:///E:/Newfolder/Tamasha-Bollywood-movie-Official-Trailer-Released.jpg');

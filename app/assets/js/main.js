@@ -279,18 +279,17 @@ function startSeek(){
     }
     // Playing next file if the current song has ended
     if(audio.ended && songIndex < songQueue.length){
+      console.log(repeat);
+      songIndex++
       if(songIndex === songQueue.length - 1 && repeat === 1){
         songIndex = 0
       }
       else if(repeat === 2){
-        songIndex = songIndex
+        songIndex = songIndex - 1
       }
-      else{
-        if(songIndex < songQueue.length - 1){
-          songIndex++
-        }
+      if(songIndex < songQueue.length){
+        playFile(songQueue[songIndex])
       }
-      playFile(songQueue[songIndex])
     }
   }, intervalTime)
 }
