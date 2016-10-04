@@ -69,10 +69,10 @@
       <div class="col-md-2 col-lg-2 col-sm-2 col-xs-12 side-menu no-padding">
         <p class="side-menu-item" id="current-playlist-option">Current Playlist</p><hr class="side-menu-seperator">
         <p class="side-menu-item" id="saved-playlist-option">Saved Playlists</p><hr class="side-menu-seperator">
-        <!-- <p class="side-menu-item" id="saavn-station" onclick="openSaavn()">Saavan</p> -->
+        <p class="side-menu-item" id="saavn-station" onclick="openSaavn()">Saavan</p>
       </div>
       <div class="col-md-10 col-lg-10 col-sm-10 col-xs-12 current-playlist no-padding" id="current-playlist">
-        <table style="width:100%;margin-top:30px;" class="table-hover" id="current-playlist-table">
+        <table style="width:100%;margin-top:30px;" class="table-hover">
           <thead>
             <tr>
               <td>Name</td>
@@ -83,20 +83,18 @@
           <tbody id="playlist-body">
           </tbody>
         </table>
-        <table style="width:100%;margin-top:30px;" class="table-hover" id="saved-playlist-table">
+      </div>
+      <div class="col-md-10 col-lg-10 col-sm-10 col-xs-12 current-playlist no-padding" id="saved-playlist">
+        <table style="width:100%;margin-top:30px;" class="table-hover">
           <thead>
             <tr>
               <td>Name</td>
-              <td>Number of Songs</td>
               <td>Duration</td>
             </tr>
           </thead>
-          <tbody id="saved-playlist-body">
+          <tbody id="playlist-body">
           </tbody>
         </table>
-      </div>
-      <div class="col-md-10 col-lg-10 col-sm-10 col-xs-12 saved-playlist no-padding" id="saved-playlist">
-
       </div>
     </div>
 
@@ -111,11 +109,6 @@
 
     <section id="file-options">
       <p id="remove-file-btn">Remove</p>
-    </section>
-
-    <section id="playlist-options">
-      <p id="play-playlist-btn">Play</p>
-      <p id="remove-playlist-btn">Remove</p>
     </section>
 
     <section id="black-overlay"></section>

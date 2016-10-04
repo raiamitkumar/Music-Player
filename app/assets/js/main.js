@@ -18,7 +18,9 @@ var min_button = document.getElementById('minimize'), max_button = document.getE
   blackOverlay = document.getElementById('black-overlay'), playlistForm = document.getElementById('get-playlist-name-form'),
   playlistSubmtBtn = document.getElementById('playlist-name-submit'), playlistInput = document.getElementById('playlist-name-input'),
   errorMsg = document.getElementById('error-message'), currentPlaylistOption = document.getElementById('current-playlist-option'),
-  savedPlaylistOption = document.getElementById('saved-playlist-option')
+  savedPlaylistOption = document.getElementById('saved-playlist-option'), currentPlaylistTable = document.getElementById('current-playlist-table'),
+  savedPlaylistTable = document.getElementById('saved-playlist-table'), playlistFileOptions = document.getElementById('playlist-options'),
+  playPlaylist = document.getElementById('play-playlist-btn'), removedPlaylist = document.getElementById('remove-playlist-btn')
 
 var isMaximized = false, menuActive = false, count = 0, path = "", songDuration, audio, timeLeft = 0,
   timePlayed = 0, songIndex = 0, intervalTime = 1000, volume, seeking = false, rightClickTarget, subMenuActive = false,
@@ -161,14 +163,25 @@ $(document).ready(function(){
     $(file_options).css('top', topOffset)
     $(file_options).css('display', 'block')
   })
+  $("#saved-playlist-body").on("contextmenu", "tr", function (event) {
+    rightClickTarget = $("#saved-playlist-body tr").index(this)
+    rightClickTarget = rightClickTarget + 1
+    var topOffset = $("#saved-playlist-body tr:nth-child("+ rightClickTarget +")").offset().top
+    subMenuActive = true
+    $(playlistFileOptions).css('top', topOffset)
+    $(playlistFileOptions).css('display', 'block')
+  })
   $(window).blur(function(){
     notInFocus = true
-  });
+  })
   $(window).focus(function(){
     notInFocus = false
-  });
+  })
+  savedPlaylists = JSON.parse(storage.getItem('playlists'))
+  populatePlaylists()
 })
 remove_file_btn.addEventListener('click', function(){
+  $(file_options).css('display', 'none')
   $("#playlist-body tr:nth-child("+ rightClickTarget +")").remove()
   rightClickTarget = rightClickTarget - 1
   songQueue.splice(rightClickTarget, 1)
@@ -237,9 +250,32 @@ blackOverlay.addEventListener('click', function(){
   }
 })
 savedPlaylistOption.addEventListener('click', function(){
-  currentPlaylistSection.style.display = "none"
+  currentPlaylistTable.style.display = "none"
+  savedPlaylistTable.style.display = "table"
 })
-
+currentPlaylistOption.addEventListener('click', function(){
+  savedPlaylistTable.style.display = "none"
+  currentPlaylistTable.style.display = "table"
+})
+playPlaylist.addEventListener('click', function(){
+  rightClickTarget = rightClickTarget - 1
+  if(audio){
+    audio.pause()
+  }
+  songIndex = 0
+  songQueue = savedPlaylists[rightClickTarget].songs
+  addToPlaylist(songQueue)
+  playFile(songQueue[songIndex])
+  $(playlistFileOptions).css('display', 'none')
+  playingPlayist = true
+})
+removedPlaylist.addEventListener('click', function(){
+  $("#saved-playlist-body tr:nth-child("+ rightClickTarget +")").remove()
+  rightClickTarget = rightClickTarget - 1
+  savedPlaylists.splice(rightClickTarget, 1)
+  storage.setItem('playlists', JSON.stringify(savedPlaylists))
+  $(playlistFileOptions).css('display', 'none')
+})
 
 // Function to check for the height of the window and recompute the height of the current playlist section
 function resizeContainer(){
@@ -307,9 +343,8 @@ function startSeek(){
     }
     // Playing next file if the current song has ended
     if(audio.ended && songIndex < songQueue.length){
-      console.log(repeat);
       songIndex++
-      if(songIndex === songQueue.length - 1 && repeat === 1){
+      if(songIndex === songQueue.length && repeat === 1){
         songIndex = 0
       }
       else if(repeat === 2){
@@ -357,10 +392,47 @@ function savePlaylist(playListName){
   }
   savedPlaylists.push(newPlaylist)
   storage.setItem('playlists', JSON.stringify(savedPlaylists))
-  console.log('here');
-  console.log(storage.getItem('playlists'))
+  tableRow = document.createElement("tr")
+  rowElement = document.createElement("td")
+  textElement = document.createTextNode(newPlaylist.name)
+  rowElement.appendChild(textElement)
+  tableRow.appendChild(rowElement)
+  rowElement = document.createElement("td")
+  textElement = document.createTextNode(newPlaylist.songs.length)
+  rowElement.appendChild(textElement)
+  tableRow.appendChild(rowElement)
+  rowElement = document.createElement("td")
+  textElement = document.createTextNode("1000")
+  rowElement.appendChild(textElement)
+  tableRow.appendChild(rowElement)
+  tableRow.setAttribute("id", i)
+  document.getElementById('saved-playlist-body').appendChild(tableRow)
 }
-
+// Function to populate the playlist table
+function populatePlaylists(){
+  for(i = 0; i < savedPlaylists.length; i++){
+    tableRow = document.createElement("tr")
+    rowElement = document.createElement("td")
+    textElement = document.createTextNode(savedPlaylists[i].name)
+    rowElement.appendChild(textElement)
+    tableRow.appendChild(rowElement)
+    rowElement = document.createElement("td")
+    textElement = document.createTextNode(savedPlaylists[i].songs.length)
+    rowElement.appendChild(textElement)
+    tableRow.appendChild(rowElement)
+    rowElement = document.createElement("td")
+    textElement = document.createTextNode("1000")
+    rowElement.appendChild(textElement)
+    tableRow.appendChild(rowElement)
+    rowElement = document.createElement("td")
+    textElement = document.createTextNode("Play")
+    rowElement.appendChild(textElement)
+    rowElement.setAttribute("id", "column"+i)
+    tableRow.appendChild(rowElement)
+    tableRow.setAttribute("id", i)
+    document.getElementById('saved-playlist-body').appendChild(tableRow)
+  }
+}
 
 // Listening for IPC Messages for playing next song
 ipcRender.on('playNext', ()=>{
