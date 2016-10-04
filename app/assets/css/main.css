@@ -104,7 +104,7 @@ body:hover{
   left: 0px;
   width: 100vw;
   height: 250px;
-  background: rgba(124, 78, 234, 0.75);
+  background: rgba(255, 87, 34, 0.7);
 }
 .album-banner{
   width: 100vw;
@@ -117,7 +117,7 @@ body:hover{
   bottom: 0px;
   width: 100vw;
   height: 70px;
-  background: rgba(124, 78, 234, 0.9);
+  background: rgba(255, 87, 34, 0.8);
   padding-top: 25px;
   z-index: 100;
 }
